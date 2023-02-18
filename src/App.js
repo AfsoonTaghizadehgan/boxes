@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+
+
+import React from "react"
+import Box from "./Components/Box"
+import boxes from './boxes'
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+//App funtion with toggle function inside to change the BOX background color when clicked
+export default function App() {
+    const [box, setBox]= React.useState(boxes)
 
-export default App;
+    function toggle(id){
+        setBox(prevOn => {
+            const newBoxArray=[]
+            prevOn.forEach(element => {
+                if(element.id === id){
+                    const updatedBox={
+                        ...element,
+                        on: !element.on
+                    }
+                    newBoxArray.push(updatedBox)
+                }
+                else{
+                    newBoxArray.push(element)
+                }
+            });
+            return newBoxArray
+        })
+    }
+
+    const boxArray=box.map(items =>(
+         <Box 
+            id={items.id}
+            on={items.on}
+            keys={items.id}
+            toggle={toggle}
+            />
+    )
+    )
+    return (
+        <div className="App">
+            
+            {boxArray}
+        </div>
+    )
+}
