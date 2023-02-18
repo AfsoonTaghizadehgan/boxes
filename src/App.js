@@ -10,6 +10,7 @@ import './App.css';
 export default function App() {
     const [box, setBox]= React.useState(boxes)
 
+    //we need to pass the id in order for react to know which box we have clicked, then change the on property to the opposite and pass all items to a new array
     function toggle(id){
         setBox(prevOn => {
             const newBoxArray=[]
@@ -29,6 +30,7 @@ export default function App() {
         })
     }
 
+    //after we click a box, the App will be rerendered, the box array is now changed to the newBoxArray from the toggle function, and the new format will be displayed
     const boxArray=box.map(items =>(
          <Box 
             id={items.id}
