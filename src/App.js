@@ -26,7 +26,7 @@ export default function App() {
             id={items.id}
             on={items.on}
             keys={items.id}
-            toggle={toggle}
+            toggle={() => toggle(items.id)}
             />
     )
     )
