@@ -12,21 +12,11 @@ export default function App() {
 
     //we need to pass the id in order for react to know which box we have clicked, then change the on property to the opposite and pass all items to a new array
     function toggle(id){
-        setBox(prevOn => {
-            const newBoxArray=[]
-            prevOn.forEach(element => {
-                if(element.id === id){
-                    const updatedBox={
-                        ...element,
-                        on: !element.on
-                    }
-                    newBoxArray.push(updatedBox)
-                }
-                else{
-                    newBoxArray.push(element)
-                }
-            });
-            return newBoxArray
+        setBox(prevBox => {
+            return prevBox.map((square) => {
+                return square.id === id ? {...square, on:!square.on} : square
+            })
+        
         })
     }
 
